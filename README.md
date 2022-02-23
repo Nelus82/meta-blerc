@@ -34,6 +34,8 @@ A big advantage of this driver is that you can remap almost every key on the key
 WebSocket needs a active connection to communicate, this connection is activated by the power_on command. Keep this in mind if you want to use a shortcut in a different recipe.
 
 
+
+
 I want to thank Jac459 and MarkusM for helping me and for creating this fantastic piece of software that brings our Neeo to life (as it was intended).
 Also want to thank hanneman (https://github.com/hannemann) for creating BLE-Remote-Companion.
 
