@@ -15,7 +15,7 @@ The ESP32 must be flashed with BLE-Remote-Companion (https://github.com/hanneman
 
 
 ## ESP32 Hardware
-I've tested BLE-Remote-Companion on a ESP-WROOM-32, that worked very well. To reduce the latency to a minimum hanneman added hardware support for a ESP with ethernet (WT32-ETH01). This works perfectly en very fast, I'm getting the same experience as the default remote.
+I've tested BLE-Remote-Companion on a ESP-WROOM-32, that worked very well. To reduce the latency to a minimum hanneman added hardware support for a ESP with ethernet (WT32-ETH01). This works perfectly en very fast, I'm getting the same experience on the Neeo as the default remote.
 
 
 ## Installation instructions
