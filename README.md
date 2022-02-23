@@ -1,9 +1,10 @@
 # meta-blerc-shield
 
 ## General
-This driver is to control your Nvidia Shield (or any device that accepts a bluetooth keyboard) from your Neeo with help of meta2 (https://github.com/jac459/meta). You need additional hardware (ESP32) to simulate a bluetooth keyboard. I made the driver as simple as possible for my needs. The driver uses Websocket to communicate with the ESP. If you miss something do not hesitate to ask or help.
+This driver is to control your Nvidia Shield (or any device that accepts a bluetooth keyboard) from your Neeo with help of meta2 (https://github.com/jac459/meta). You need additional hardware (ESP32) to simulate a bluetooth keyboard. 
+I made the driver as simple as possible for my needs. The driver uses Websocket to communicate with the ESP. If you miss something do not hesitate to ask or help.
 
-The ESP32 must be flashed with BLE-Remote-Companion (https://github.com/hannemann/BLE-Remote-Companion. This software turns an ESP32 into a virtual keyboard and mouse running a websocket server and/or Home Assistant websocket API client. The built in webserver offers a HTML page with a grapical remote, a simple keyboard and mouse functionality.
+The ESP32 must be flashed with BLE-Remote-Companion (https://github.com/hannemann/BLE-Remote-Companion). This software turns an ESP32 into a virtual keyboard and mouse running a websocket server and/or Home Assistant websocket API client. The built in webserver offers a HTML page with a grapical remote, a simple keyboard and mouse functionality.
 
 
 ## Requirements
