@@ -26,7 +26,7 @@ I've tested BLE-Remote-Companion on a ESP-WROOM-32, that worked very well. To re
 - Setup the device acording your needs
 
 
-## Remapping keys
+## Remapping keys Nvidia Shield
 A big advantage of this driver is that you can remap almost every key on the keyboard. Inside Kodi you can use the standard C key to get a context menu, but I also remapped keys to syns subtitles. Inside the Shield I remapped keys to applications, that way I can start Netflix with a shortcut on the neeo. The possibilities are endless
 
 
