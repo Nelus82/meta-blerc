@@ -20,7 +20,7 @@ I've tested BLE-Remote-Companion on a ESP-WROOM-32, that worked very well. To re
 
 ## Installation instructions
 - Add Device on Neeo
-- Search driver (BLERC_Shield)
+- Search driver (BLERC)
 - Fill in the IP of the BLE-Remote-Companion.
 - Select a room which the device should be added.
 - Setup the device acording your needs
