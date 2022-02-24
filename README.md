@@ -1,4 +1,4 @@
-# meta-blerc-shield
+# meta-blerc
 
 ## General
 This driver is to control your Nvidia Shield (or any device that accepts a bluetooth keyboard) from your Neeo with help of meta2 (https://github.com/jac459/meta). You need additional hardware (ESP32) to simulate a bluetooth keyboard. 
