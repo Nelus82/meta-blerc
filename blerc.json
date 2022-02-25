@@ -1,0 +1,108 @@
+{   "name":"BLERC",
+    "manufacturer":"Bluetooth LE Remote Companion",
+    "type":"MUSICPLAYER",
+    "version":1,
+    "compatible-meta":"1.0.4",
+    "persistedvariables":{
+        "ToInitiate": true,
+        "IsRegistered": false,
+        "DeviceIp":""
+    },
+    "register":{
+        "registerheadertext": "Bluetooth LE Remote Companion",
+        "registerdescription": "Please enter the IP address of your Bluetooth LE Remote Companion \n For example: 192.168.2.17",
+        "command": {"type": "static", "command": ".", "queryresult": "$.*"}  
+    },      
+    "discover":{
+        "welcomeheadertext": "Bluetooth LE Remote Companion",
+        "welcomedescription": "powered by meta v2 \n by JAC459 \n X \n Driver Development \n by Nelus & MarkusM",
+        "initcommandset":[{
+            "type":"static",
+            "command":".", 
+            "evalwrite":[
+                {"variable":"DeviceIp","value":"$RegistrationCode"}
+            ],
+            "evaldo":[{"test":true,"then":"__PERSIST", "or":""}]}
+        ],
+        "command": {"type": "static", "command": "$DeviceIp", "queryresult": ""}    
+    },
+    "template" :{
+    "dynamicname":"DYNAMIK_INST_START DYNAMIK \"BLERC ($Result)\" DYNAMIK_INST_END",
+    "dynamicid":"DYNAMIK_INST_START DYNAMIK \"$Result\" DYNAMIK_INST_END",
+    "variables":{
+    "BLERC_WS_URL": "DYNAMIK_INST_START DYNAMIK \"ws://$Result:81/jsonrpc\"   DYNAMIK_INST_END"
+    },
+    "listeners": {
+    "BLERC_Listener": {"type": "webSocket","command": {"connection": "$BLERC_WS_URL", "message": "message"}, "queryresult": ""}
+    },
+    "buttons": {
+        "POWER ON":         {"label": "",   "command": "", "evaldo": [{"test": true, "then": "__INITIALISE", "or": ""}]},
+        "POWER OFF":        {"label": "",   "command": "", "evaldo": [{"test": true, "then": "__CLEANUP", "or": ""}]},
+        "CURSOR UP":        {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_DPAD_UP\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "CURSOR DOWN":      {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_DPAD_DOWN\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "CURSOR LEFT":      {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_DPAD_LEFT\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "CURSOR RIGHT":     {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_DPAD_RIGHT\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "CURSOR ENTER":     {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_ENTER\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "VOLUME UP":        {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_VOLUME_UP\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "VOLUME DOWN":      {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_VOLUME_DOWN\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},        
+        "MUTE":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_VOLUME_MUTE\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},        
+        "HOME":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_HOME\",\"type\":\"CONSUMER\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "MENU":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_MENU\",\"type\":\"CONSUMER\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "BACK":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_ESCAPE\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DEL":              {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_FORWARD_DEL\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "PLAY":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_MEDIA_PLAY_PAUSE\",\"type\":\"CONSUMER\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "PAUSE":            {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_MEDIA_PLAY_PAUSE\",\"type\":\"CONSUMER\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "STOP":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_MEDIA_STOP\",\"type\":\"CONSUMER\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "PLUS":             {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_EQUALS\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "MINUS":            {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_MINUS\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F1":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F1\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F2":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F2\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F3":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F3\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F4":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F4\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F5":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F5\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F6":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F6\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F7":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F7\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F8":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F8\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F9":               {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F9\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F10":              {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F10\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F11":              {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F11\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F12":              {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F12\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "A":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_A\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "B":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_B\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "C":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_C\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "D":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_D\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "E":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_E\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "F":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_F\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "G":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_G\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "H":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_H\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "I":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_I\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "J":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_J\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "K":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_K\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "L":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_L\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "M":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_M\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "N":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_N\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "O":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_O\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "P":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_P\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "Q":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_Q\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "R":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_R\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "S":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_S\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "T":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_T\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "U":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_U\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "V":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_V\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "W":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_W\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "X":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_X\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "Y":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_Y\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "Z":                {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_Z\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 0":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_0\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 1":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_1\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 2":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_2\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 3":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_3\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 4":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_4\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 5":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_5\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 6":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_6\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 7":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_7\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 8":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_8\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"},
+        "DIGIT 9":          {"label": "",   "type": "webSocket","command": "{\"connection\": \"$BLERC_WS_URL\", \"message\":{\"method\":\"keypress\",\"params\":{\"code\":\"KEYCODE_9\",\"type\":\"KEYBOARD\"},\"jsonrpc\":\"2.0\",\"id\":1}}"}
+    }
+  }
+}
